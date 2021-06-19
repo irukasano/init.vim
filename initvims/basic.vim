@@ -106,7 +106,7 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 try
-    colorscheme default
+    colorscheme hybrid
 catch
 endtry
 

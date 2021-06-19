@@ -24,8 +24,13 @@ Plug 'lambdalisue/nerdfont.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'lambdalisue/glyph-palette.vim'
 
-" 
-" Plug 'itchyny/lightline.vim'
+" status line
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'ryanoasis/vim-devicons'
+
+" colorscheme
+Plug 'w0ng/vim-hybrid'
 
 call plug#end()
 
