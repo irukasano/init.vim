@@ -139,6 +139,9 @@ set termguicolors
 
 set pumblend=10
 
+highlight CocFloating ctermbg=darkblue
+highlight CocErrorFloat ctermfg=darkred
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo

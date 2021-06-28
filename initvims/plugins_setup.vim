@@ -11,12 +11,6 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin()
 
 " auto complete
-"Plug 'Shougo/deoplete.nvim'
-"Plug 'deoplete-plugins/deoplete-jedi'
-"Plug 'Shougo/neco-vim'
-" TODO phpactor は php7.3 以上が必要なので、phpcd がよい？
-"Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
-"Plug 'kristijanhusak/deoplete-phpactor'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
 Plug 'junegunn/fzf.vim' " needed for previews
@@ -34,6 +28,9 @@ Plug 'lambdalisue/glyph-palette.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'ryanoasis/vim-devicons'
+
+" git
+Plug 'tpope/vim-fugitive'
 
 " colorscheme
 Plug 'w0ng/vim-hybrid'
