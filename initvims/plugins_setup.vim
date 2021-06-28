@@ -11,10 +11,13 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin()
 
 " auto complete
-Plug 'Shougo/deoplete.nvim'
-Plug 'deoplete-plugins/deoplete-jedi'
-Plug 'Shougo/neco-vim'
-Plug 'phpactor/phpactor'
+"Plug 'Shougo/deoplete.nvim'
+"Plug 'deoplete-plugins/deoplete-jedi'
+"Plug 'Shougo/neco-vim'
+" TODO phpactor は php7.3 以上が必要なので、phpcd がよい？
+"Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
+"Plug 'kristijanhusak/deoplete-phpactor'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " file tree
 Plug 'lambdalisue/fern.vim'
@@ -31,6 +34,7 @@ Plug 'ryanoasis/vim-devicons'
 
 " colorscheme
 Plug 'w0ng/vim-hybrid'
+
 
 call plug#end()
 
