@@ -18,6 +18,9 @@ call plug#begin()
 "Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
 "Plug 'kristijanhusak/deoplete-phpactor'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
+Plug 'junegunn/fzf.vim' " needed for previews
+Plug 'antoinemadec/coc-fzf'
 
 " file tree
 Plug 'lambdalisue/fern.vim'

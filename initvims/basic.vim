@@ -93,6 +93,15 @@ endif
 " Add a bit extra margin to the left
 set foldcolumn=1
 
+set shortmess+=c
+
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -128,12 +137,15 @@ set ffs=unix,dos,mac
 
 set termguicolors
 
+set pumblend=10
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
+set nowritebackup
 set nowb
 set noswapfile
 
