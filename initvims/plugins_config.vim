@@ -29,8 +29,6 @@
 """"""""""""""""""""""""""""""
 " coc
 """"""""""""""""""""""""""""""
-":CocInstall coc-json
-":CocInstall coc-phpls
 let g:coc_global_extensions = [
     \ 'coc-json',
     \ 'coc-phpls',
