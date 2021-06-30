@@ -12,8 +12,9 @@ call plug#begin()
 
 " auto complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim' " needed for previews
+Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release/remote', 'do': ':UpdateRemotePlugins' }
 Plug 'antoinemadec/coc-fzf'
 
 " file tree
@@ -33,7 +34,12 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-fugitive'
 
 " colorscheme
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'w0ng/vim-hybrid'
+Plug 'jacoborus/tender.vim'
+Plug 'elvessousa/sobrio'
+"Plug 'Shatur/neovim-ayu'
+Plug 'savq/melange'
 
 
 call plug#end()

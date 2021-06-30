@@ -114,13 +114,6 @@ if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
 
-try
-    colorscheme hybrid
-catch
-endtry
-
-set background=dark
-
 " Set extra options when running in GUI mode
 if has("gui_running")
     set guioptions-=T
@@ -128,6 +121,20 @@ if has("gui_running")
     set t_Co=256
     set guitablabel=%M\ %t
 endif
+
+if !has("gui_running")
+    "set term=xterm
+    set t_Co=256
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"
+endif
+
+"try
+"    colorscheme sobrio
+"catch
+"endtry
+
+set background=dark
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -137,10 +144,7 @@ set ffs=unix,dos,mac
 
 set termguicolors
 
-set pumblend=10
-
-highlight CocFloating ctermbg=darkblue
-highlight CocErrorFloat ctermfg=darkred
+"set pumblend=10
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

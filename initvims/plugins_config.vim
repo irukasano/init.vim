@@ -32,7 +32,7 @@
 let g:coc_global_extensions = [
     \ 'coc-json',
     \ 'coc-phpls',
-    "\ 'coc-fzf-preview',
+    \ 'coc-fzf-preview',
     \ 'coc-tsserver',
     \]
 
@@ -66,8 +66,9 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-"Diagnosticsの、左横のアイコンの色設定
-highlight CocErrorSign ctermfg=15 ctermbg=196
+"highlight CocFloating ctermfg=0 ctermbg=13
+"highlight CocErrorFloat ctermfg=0 ctermbg=13
+"highlight CocErrorSign ctermfg=0 ctermbg=13
 "highlight CocWarningSign ctermfg=0 ctermbg=172
 
 "CocList
@@ -191,75 +192,99 @@ function! s:find_git_root()
 endfunction
 
 command! ProjectFiles execute 'Files' s:find_git_root()
-" command! -bang -nargs=? -complete=dir Files
-"     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-"command! -bang -nargs=? -complete=dir Files
-"    \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', 'head -20 {}']}, <bang>0)
-command! -nargs=? -complete=dir AF
-  \ call fzf#run(fzf#wrap(fzf#vim#with_preview({
-  \   'source': 'fd --type f --hidden --follow --exclude .git --no-ignore . '.expand(<q-args>)
-  \ })))
-
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
 " Terminal buffer options for fzf
 autocmd! FileType fzf
 autocmd  FileType fzf set noshowmode noruler nonu
 
-" 見た目をいい感じにする
-" 参考: https://github.com/junegunn/dotfiles/blob/master/vimrc
-"   https://github.com/junegunn/dotfiles/blob/master/vimrc
-if has('nvim')
-    function! s:create_float(hl, opts)
-        let buf = nvim_create_buf(v:false, v:true)
-        let opts = extend({'relative': 'editor', 'style': 'minimal'}, a:opts)
-        let win = nvim_open_win(buf, v:true, opts)
-        call setwinvar(win, '&winhighlight', 'NormalFloat:'.a:hl)
-        call setwinvar(win, '&colorcolumn', '')
-        return buf
-    endfunction
+hi! fzf_fg ctermfg=14
+hi! fzf_fgp ctermfg=3
+hi! fzf_hl ctermfg=5
+hi! fzf_hlp ctermfg=5
+hi! fzf_info ctermfg=6
+hi! fzf_prompt ctermfg=6
+hi! fzf_spinner ctermfg=6
+hi! fzf_pointer ctermfg=3
 
-    function! FloatingFZF()
-        " Size and position
-        let width = float2nr(&columns * 0.9)
-        let height = float2nr(&lines * 0.6)
-        let row = float2nr((&lines - height) / 2)
-        let col = float2nr((&columns - width) / 2)
+"let g:fzf_colors = {
+"  \ 'fg':      ['fg', 'fzf_fg'],
+"  \ 'hl':      ['fg', 'fzf_hl'],
+"  \ 'fg+':     ['fg', 'fzf_fgp'],
+"  \ 'hl+':     ['fg', 'fzf_hlp'],
+"  \ 'info':    ['fg', 'fzf_info'],
+"  \ 'prompt':  ['fg', 'fzf_prompt'],
+"  \ 'pointer': ['fg', 'fzf_pointer'],
+"  \ 'spinner': ['fg', 'fzf_spinner'] }
 
-        " Border
-        let top = '╭' . repeat('─', width - 2) . '╮'
-        let mid = '│' . repeat(' ', width - 2) . '│'
-        let bot = '╰' . repeat('─', width - 2) . '╯'
-        let border = [top] + repeat([mid], height - 2) + [bot]
+let g:fzf_colors = {
+  \ 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Label'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Label'],
+  \ 'info':    ['fg', 'Comment'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Function'],
+  \ 'pointer': ['fg', 'Statement'],
+  \ 'marker':  ['fg', 'Conditional'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
-        " Draw frame
-        let s:frame = s:create_float('Comment', {'row': row, 'col': col, 'width': width, 'height': height})
-        call nvim_buf_set_lines(s:frame, 0, -1, v:true, border)
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.6, 'highlight': 'Comment' } }
 
-        " Draw viewport
-        call s:create_float('Normal', {'row': row + 1, 'col': col + 2, 'width': width - 4, 'height': height - 2})
-        autocmd BufWipeout <buffer> execute 'bwipeout' s:frame
-      endfunction
+""""""""""""""""""""""""""""""
+" fzf-preview
+""""""""""""""""""""""""""""""
+let g:fzf_preview_git_files_command   = 'git ls-files --exclude-standard | while read line; do if [[ ! -L $line ]] && [[ -f $line ]]; then echo $line; fi; done'
+"let g:fzf_preview_grep_cmd            = 'rg --line-number --no-heading --color=never --sort=path'
+let g:fzf_preview_grep_cmd            = 'ag --line-number --no-heading --color=never --sort=path'
+let g:fzf_preview_mru_limit           = 500
+let g:fzf_preview_use_dev_icons       = 1
+let g:fzf_preview_default_fzf_options = {
+\ '--reverse': v:true,
+\ '--preview-window': 'wrap',
+\ '--exact': v:true,
+\ '--no-sort': v:true,
+\ }
+let $FZF_PREVIEW_PREVIEW_BAT_THEME  = 'gruvbox'
 
-    let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-	"let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+function! s:buffers_delete_from_lines(lines) abort
+    for line in a:lines
+        let matches = matchlist(line, '\[\(\d\+\)\]')
+        if len(matches) >= 1
+            execute 'Bdelete! ' . matches[1]
+        endif
+    endfor
+endfunction
 
-	let g:fzf_colors =
-	\ { 'fg': ['fg', 'Normal'],
-	\ 'bg': ['bg', 'Normal'],
-    \ 'preview-bg': ['bg', 'NormalFloat'],
-	\ 'hl': ['fg', 'Conditional'],
-	\ 'fg+': ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-	\ 'bg+': ['bg', 'CursorLine', 'CursorColumn'],
-	\ 'hl+': ['fg', 'Statement'],
-	\ 'info': ['fg', 'PreProc'],
-	\ 'border': ['fg', 'Comment'],
-	\ 'prompt': ['fg', 'Conditional'],
-	\ 'pointer': ['fg', 'Exeption'],
-	\ 'marker': ['fg', 'Keyword'],
-	\ 'spinner': ['fg', 'Label'],
-	\ 'header': ['fg', 'Comment'] }
+function! s:fzf_preview_settings() abort
+    let g:fzf_preview_grep_preview_cmd = 'COLORTERM=truecolor ' . g:fzf_preview_grep_preview_cmd
+    let g:fzf_preview_command = 'COLORTERM=truecolor ' . g:fzf_preview_command
 
-endif
+    let g:fzf_preview_custom_processes['open-file'] = fzf_preview#remote#process#get_default_processes('open-file', 'coc')
+    let g:fzf_preview_custom_processes['open-file']['ctrl-s'] = g:fzf_preview_custom_processes['open-file']['ctrl-x']
+    call remove(g:fzf_preview_custom_processes['open-file'], 'ctrl-x')
+
+    let g:fzf_preview_custom_processes['open-buffer'] = fzf_preview#remote#process#get_default_processes('open-buffer', 'coc')
+    let g:fzf_preview_custom_processes['open-buffer']['ctrl-s'] = g:fzf_preview_custom_processes['open-buffer']['ctrl-x']
+    call remove(g:fzf_preview_custom_processes['open-buffer'], 'ctrl-q')
+    let g:fzf_preview_custom_processes['open-buffer']['ctrl-x'] = get(function('s:buffers_delete_from_lines'), 'name')
+
+    let g:fzf_preview_custom_processes['open-bufnr'] = fzf_preview#remote#process#get_default_processes('open-bufnr', 'coc')
+    let g:fzf_preview_custom_processes['open-bufnr']['ctrl-s'] = g:fzf_preview_custom_processes['open-bufnr']['ctrl-x']
+    call remove(g:fzf_preview_custom_processes['open-bufnr'], 'ctrl-q')
+    let g:fzf_preview_custom_processes['open-bufnr']['ctrl-x'] = get(function('s:buffers_delete_from_lines'), 'name')
+
+    let g:fzf_preview_custom_processes['git-status'] = fzf_preview#remote#process#get_default_processes('git-status', 'coc')
+    let g:fzf_preview_custom_processes['git-status']['ctrl-s'] = g:fzf_preview_custom_processes['git-status']['ctrl-x']
+    call remove(g:fzf_preview_custom_processes['git-status'], 'ctrl-x')
+endfunction
+
+autocmd User fzf_preview#initialized call s:fzf_preview_settings()
+
 
 """"""""""""""""""""""""""""""
 " fern
@@ -524,4 +549,17 @@ nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" treesitter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"lua <<EOF
+"require'nvim-treesitter.configs'.setup {
+"    ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+"    highlight = {
+"        enable = true,              -- false will disable the whole extension
+"        disable = { "vue", "ruby" },  -- list of language that will be disabled
+"    },
+"}
+"EOF
 
