@@ -181,10 +181,12 @@ tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 """"""""""""""""""""""""""""""
 " fzf
 """"""""""""""""""""""""""""""
-nnoremap <silent> <leader>a :<C-u>Ag<CR>
-nnoremap <silent> <leader>p :<C-u>ProjectFiles<CR>
-nnoremap <silent> <leader>b :<C-u>Buffers<CR>
-nnoremap <silent> <leader>h :<C-u>History<CR>
+nnoremap <silent> <leader>fa :<C-u>Ag<CR>
+nnoremap <silent> <leader>fp :<C-u>ProjectFiles<CR>
+nnoremap <silent> <leader>fb :<C-u>Buffers<CR>
+nnoremap <silent> <leader>fh :<C-u>History<CR>
+nnoremap <silent> <leader>fc :<C-u>Commits<CR>
+nnoremap <silent> <leader>fs :<C-u>GFiles?<CR>
 
 function! s:find_git_root()
     " プロジェクトルートで開く
@@ -192,31 +194,13 @@ function! s:find_git_root()
 endfunction
 
 command! ProjectFiles execute 'Files' s:find_git_root()
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+"command! -bang -nargs=? -complete=dir Files
+"    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
 " Terminal buffer options for fzf
 autocmd! FileType fzf
-autocmd  FileType fzf set noshowmode noruler nonu
-
-hi! fzf_fg ctermfg=14
-hi! fzf_fgp ctermfg=3
-hi! fzf_hl ctermfg=5
-hi! fzf_hlp ctermfg=5
-hi! fzf_info ctermfg=6
-hi! fzf_prompt ctermfg=6
-hi! fzf_spinner ctermfg=6
-hi! fzf_pointer ctermfg=3
-
-"let g:fzf_colors = {
-"  \ 'fg':      ['fg', 'fzf_fg'],
-"  \ 'hl':      ['fg', 'fzf_hl'],
-"  \ 'fg+':     ['fg', 'fzf_fgp'],
-"  \ 'hl+':     ['fg', 'fzf_hlp'],
-"  \ 'info':    ['fg', 'fzf_info'],
-"  \ 'prompt':  ['fg', 'fzf_prompt'],
-"  \ 'pointer': ['fg', 'fzf_pointer'],
-"  \ 'spinner': ['fg', 'fzf_spinner'] }
+autocmd  FileType fzf set noshowmode noruler nonu 
+"autocmd  FileType fzf set ambiwidth=single
 
 let g:fzf_colors = {
   \ 'fg':      ['fg', 'Normal'],
@@ -233,7 +217,27 @@ let g:fzf_colors = {
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.6, 'highlight': 'Comment' } }
+"ambiwidth=single でないと枠線がずれるが、doubleでないと日本語等がずれる
+"let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.7, 'highlight': 'Comment' } }
+let g:fzf_layout = { 'down': '~40%' }
+" [Buffers] Jump to the existing window if possible
+
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+let g:fzf_buffers_jump = 1
+
+" [[B]Commits] Customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+" [Tags] Command to generate tags file
+"let g:fzf_tags_command = 'ctags -R'
+
+" [Commands] --expect expression for directly executing the command
+"let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+
 
 """"""""""""""""""""""""""""""
 " fzf-preview

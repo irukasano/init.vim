@@ -17,7 +17,7 @@ let mapleader = ","
 
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
-command W w !sudo tee % > /dev/null
+command! W w !sudo tee % > /dev/null
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -338,9 +338,10 @@ set formatoptions+=mM
 
 "□や○の文字があってもカーソル位置がずれないようにする。
 set ambiwidth=double
+"set ambiwidth=single
 
 "画面最後の行をできる限り表示する。
-set display+=lastline
+"set display+=lastline
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
