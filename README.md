@@ -101,6 +101,7 @@
 |`c-h`              | 親フォルダの階層へ移動              |
 |`e`                | ファイルを開く                      |
 |`t`                | 別タブでファイルを開く              |
+|`<shift>b`         | ブックマークに追加                  |
 |`-`                | ファイルを選択                      |
 |`<shift>c`         | ファイルをコピー                    |
 |`<shift>m`         | ファイルをカット                    |
@@ -143,8 +144,8 @@ fern 用のブックマーク機能用プラグインです。
 |`c-b`              | ウィンドウ表示位置を上スクロール    |
 
 ### [fzf](https://github.com/junegunn/fzf)
-### [fzf](https://github.com/junegunn/fzf.vim)
-### [fzf](https://github.com/antoinemadec/coc-fzf)
+### [fzf.vim](https://github.com/junegunn/fzf.vim)
+### [coc-fzf](https://github.com/antoinemadec/coc-fzf)
 
 #### キーマップ
 
