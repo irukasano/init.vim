@@ -14,7 +14,6 @@ call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim' " needed for previews
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release/remote', 'do': ':UpdateRemotePlugins' }
 Plug 'antoinemadec/coc-fzf'
 
 " file tree
@@ -40,7 +39,7 @@ Plug 'jacoborus/tender.vim'
 Plug 'elvessousa/sobrio'
 "Plug 'Shatur/neovim-ayu'
 Plug 'savq/melange'
-
+Plug 'dracula/vim', {'as': 'dracula'}
 
 call plug#end()
 

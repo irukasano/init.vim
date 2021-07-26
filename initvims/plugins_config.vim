@@ -202,24 +202,24 @@ autocmd! FileType fzf
 autocmd  FileType fzf set noshowmode noruler nonu 
 "autocmd  FileType fzf set ambiwidth=single
 
-let g:fzf_colors = {
-  \ 'fg':      ['fg', 'Normal'],
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Label'],
+  \ 'hl':      ['fg', 'Comment'],
   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Label'],
-  \ 'info':    ['fg', 'Comment'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
   \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Function'],
-  \ 'pointer': ['fg', 'Statement'],
-  \ 'marker':  ['fg', 'Conditional'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
 "ambiwidth=single でないと枠線がずれるが、doubleでないと日本語等がずれる
-"let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.7, 'highlight': 'Comment' } }
-let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8, 'highlight': 'Comment' } }
+"let g:fzf_layout = { 'down': '~40%' }
 " [Buffers] Jump to the existing window if possible
 
 let g:fzf_action = {
@@ -237,57 +237,6 @@ let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 
 " [Commands] --expect expression for directly executing the command
 "let g:fzf_commands_expect = 'alt-enter,ctrl-x'
-
-
-""""""""""""""""""""""""""""""
-" fzf-preview
-""""""""""""""""""""""""""""""
-let g:fzf_preview_git_files_command   = 'git ls-files --exclude-standard | while read line; do if [[ ! -L $line ]] && [[ -f $line ]]; then echo $line; fi; done'
-"let g:fzf_preview_grep_cmd            = 'rg --line-number --no-heading --color=never --sort=path'
-let g:fzf_preview_grep_cmd            = 'ag --line-number --no-heading --color=never --sort=path'
-let g:fzf_preview_mru_limit           = 500
-let g:fzf_preview_use_dev_icons       = 1
-let g:fzf_preview_default_fzf_options = {
-\ '--reverse': v:true,
-\ '--preview-window': 'wrap',
-\ '--exact': v:true,
-\ '--no-sort': v:true,
-\ }
-let $FZF_PREVIEW_PREVIEW_BAT_THEME  = 'gruvbox'
-
-function! s:buffers_delete_from_lines(lines) abort
-    for line in a:lines
-        let matches = matchlist(line, '\[\(\d\+\)\]')
-        if len(matches) >= 1
-            execute 'Bdelete! ' . matches[1]
-        endif
-    endfor
-endfunction
-
-function! s:fzf_preview_settings() abort
-    let g:fzf_preview_grep_preview_cmd = 'COLORTERM=truecolor ' . g:fzf_preview_grep_preview_cmd
-    let g:fzf_preview_command = 'COLORTERM=truecolor ' . g:fzf_preview_command
-
-    let g:fzf_preview_custom_processes['open-file'] = fzf_preview#remote#process#get_default_processes('open-file', 'coc')
-    let g:fzf_preview_custom_processes['open-file']['ctrl-s'] = g:fzf_preview_custom_processes['open-file']['ctrl-x']
-    call remove(g:fzf_preview_custom_processes['open-file'], 'ctrl-x')
-
-    let g:fzf_preview_custom_processes['open-buffer'] = fzf_preview#remote#process#get_default_processes('open-buffer', 'coc')
-    let g:fzf_preview_custom_processes['open-buffer']['ctrl-s'] = g:fzf_preview_custom_processes['open-buffer']['ctrl-x']
-    call remove(g:fzf_preview_custom_processes['open-buffer'], 'ctrl-q')
-    let g:fzf_preview_custom_processes['open-buffer']['ctrl-x'] = get(function('s:buffers_delete_from_lines'), 'name')
-
-    let g:fzf_preview_custom_processes['open-bufnr'] = fzf_preview#remote#process#get_default_processes('open-bufnr', 'coc')
-    let g:fzf_preview_custom_processes['open-bufnr']['ctrl-s'] = g:fzf_preview_custom_processes['open-bufnr']['ctrl-x']
-    call remove(g:fzf_preview_custom_processes['open-bufnr'], 'ctrl-q')
-    let g:fzf_preview_custom_processes['open-bufnr']['ctrl-x'] = get(function('s:buffers_delete_from_lines'), 'name')
-
-    let g:fzf_preview_custom_processes['git-status'] = fzf_preview#remote#process#get_default_processes('git-status', 'coc')
-    let g:fzf_preview_custom_processes['git-status']['ctrl-s'] = g:fzf_preview_custom_processes['git-status']['ctrl-x']
-    call remove(g:fzf_preview_custom_processes['git-status'], 'ctrl-x')
-endfunction
-
-autocmd User fzf_preview#initialized call s:fzf_preview_settings()
 
 
 """"""""""""""""""""""""""""""

@@ -189,7 +189,7 @@ fern 用のブックマーク機能用プラグインです。
 |`<leader>fb`       | バッファを検索                      |
 |`<leader>fh`       | 履歴を検索                          |
 |`<leader>fc`       | Git Commit                          |
-|`<leader>fs`       | git status                          |
+|`<leader>fs`       | Git Status                          |
 
 ### [fugitive](https://github.com/tpope/vim-fugitive')
 
