@@ -129,10 +129,10 @@ if !has("gui_running")
     let &t_AF="\e[38;5;%dm"
 endif
 
-"try
-"    colorscheme sobrio
-"catch
-"endtry
+try
+    colorscheme default
+catch
+endtry
 
 set background=dark
 
@@ -337,8 +337,8 @@ map <leader>ro :set readonly!<cr>
 set formatoptions+=mM
 
 "□や○の文字があってもカーソル位置がずれないようにする。
-"set ambiwidth=double
-set ambiwidth=single
+set ambiwidth=double
+"set ambiwidth=single
 
 "画面最後の行をできる限り表示する。
 "set display+=lastline
