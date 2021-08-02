@@ -2,3 +2,4 @@ plugged/
 vendor/
 env/
 .netrwhist
+initvims/my_configs.vim

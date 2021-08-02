@@ -6,6 +6,6 @@ source ~/.config/nvim/initvims/plugins_config.vim
 source ~/.config/nvim/initvims/extended.vim
 
 try
-    source ./my_configs.vim
+    source ~/.config/nvim/initvims/my_configs.vim
 catch
 endtry

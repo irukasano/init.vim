@@ -218,7 +218,7 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 "ambiwidth=single でないと枠線がずれるが、doubleでないと日本語等がずれる
-let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8, 'highlight': 'Comment' } }
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8, 'border': 'rounded' } }
 "let g:fzf_layout = { 'down': '~40%' }
 " [Buffers] Jump to the existing window if possible
 
@@ -237,6 +237,8 @@ let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 
 " [Commands] --expect expression for directly executing the command
 "let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+
+let $FZF_DEFAULT_OPTS='--border=sharp --no-unicode'
 
 
 """"""""""""""""""""""""""""""
