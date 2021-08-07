@@ -32,7 +32,7 @@
 let g:coc_global_extensions = [
     \ 'coc-json',
     \ 'coc-phpls',
-    \ 'coc-fzf-preview',
+    \ 'coc-html',
     \ 'coc-tsserver',
     \]
 
@@ -177,6 +177,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+
 
 """"""""""""""""""""""""""""""
 " fzf

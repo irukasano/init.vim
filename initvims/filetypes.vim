@@ -73,6 +73,11 @@ endif
 
 
 """"""""""""""""""""""""""""""
+" => Html section
+""""""""""""""""""""""""""""""
+autocmd Filetype html inoremap <buffer> </ </<C-x><C-o><ESC>F<i
+
+""""""""""""""""""""""""""""""
 " => Twig section
 """"""""""""""""""""""""""""""
 autocmd BufRead *.twig set syntax=html filetype=html
