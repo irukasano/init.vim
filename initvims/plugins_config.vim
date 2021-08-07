@@ -30,10 +30,13 @@
 " coc
 """"""""""""""""""""""""""""""
 let g:coc_global_extensions = [
-    \ 'coc-json',
-    \ 'coc-phpls',
     \ 'coc-html',
+    \ 'coc-css',
+    \ 'coc-json',
+    \ 'coc-yaml',
     \ 'coc-tsserver',
+    \ 'coc-phpls',
+    \ 'coc-python',
     \]
 
 let g:coc_user_config = {}
