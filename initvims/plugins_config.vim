@@ -1,32 +1,5 @@
 
 """"""""""""""""""""""""""""""
-" deoplete
-""""""""""""""""""""""""""""""
-"let g:deoplete#enable_at_startup = 1
-"
-"inoremap <expr><C-h> deoplete#smart_close_popup()."<C-h>"
-"inoremap <expr><BS> deoplete#smart_close_popup()."<C-h>"
-"
-""inoremap <expr><tab> pumvisible() ? "\<C-n>" :
-""        \ neosnippet#expandable_or_jumpable() ?
-""        \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
-"
-"call deoplete#custom#option({
-"    \ 'auto_complete': v:true,
-"    \ 'min_pattern_length': 2,
-"    \ 'auto_complete_delay': 0,
-"    \ 'auto_refresh_delay': 20,
-"    \ 'refresh_always': v:true,
-"    \ 'smart_case': v:true,
-"    \ 'camel_case': v:true,
-"    \ })
-"
-"call deoplete#custom#option('sources', {
-"    \ 'php' : ['omni', 'phpactor', 'ultisnips', 'buffer']
-"    \ })
-"
-
-""""""""""""""""""""""""""""""
 " coc
 """"""""""""""""""""""""""""""
 let g:coc_global_extensions = [

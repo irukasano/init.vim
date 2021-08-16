@@ -26,7 +26,6 @@ Plug 'lambdalisue/glyph-palette.vim'
 
 " status line
 Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-fugitive'
 Plug 'ryanoasis/vim-devicons'
 
 " git
