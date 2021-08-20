@@ -14,6 +14,12 @@ let g:coc_global_extensions = [
 
 let g:coc_user_config = {}
 
+"highlight CocFloating ctermfg=0 ctermbg=13
+"highlight CocErrorFloat ctermfg=0 ctermbg=13
+"highlight CocErrorSign ctermfg=0 ctermbg=13
+"highlight CocWarningSign ctermfg=0 ctermbg=172
+"highlight CocMenuSel cterm=bold ctermfg=14 guifg=#40ffff
+
 inoremap <silent><expr> <TAB>
     \ pumvisible() ? "\<C-n>" :
     \ <SID>check_back_space() ? "\<TAB>" :
@@ -35,17 +41,30 @@ endif
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-"highlight CocFloating ctermfg=0 ctermbg=13
-"highlight CocErrorFloat ctermfg=0 ctermbg=13
-"highlight CocErrorSign ctermfg=0 ctermbg=13
-"highlight CocWarningSign ctermfg=0 ctermbg=172
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
 
 "CocList
 nmap <silent> <leader><leader> :<C-u>CocList<cr>
