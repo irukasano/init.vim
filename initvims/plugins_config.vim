@@ -176,7 +176,7 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 
 " Terminal buffer options for fzf
 autocmd! FileType fzf
-autocmd  FileType fzf set noshowmode noruler nonu 
+autocmd  FileType fzf set noshowmode noruler nonu
 "autocmd  FileType fzf set ambiwidth=single
 
 let g:fzf_colors =
@@ -254,7 +254,7 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['readonly', 'modified', 'fugitive', 'gitgutter', 'filename', 'dirname']],
-      \   'right': [ ['lineinfo', 'percent'], 
+      \   'right': [ ['lineinfo', 'percent'],
       \              ['fileformat','fileencoding', 'filetype'] ]
       \ },
       \ 'inactive': {
@@ -328,7 +328,7 @@ function! LightlineTabFilename(n) abort
   "let _ = expand('#'.buflist[winnr - 1].':p')
   let _ = expand('#'.buflist[winnr - 1])
   let icon = WebDevIconsGetFileTypeSymbol(_)
-  if _ ==# '' 
+  if _ ==# ''
     return '[No Name]'
   endif
   let h1 = expand('#'.buflist[winnr - 1].':p:h:h:t')
@@ -339,7 +339,7 @@ endfunction
 
 function! LightlineTabModified(n) abort
   let winnr = tabpagewinnr(a:n)
-  return gettabwinvar(a:n, winnr, '&modified') ? s:lightline_modified_char : 
+  return gettabwinvar(a:n, winnr, '&modified') ? s:lightline_modified_char :
     \ gettabwinvar(a:n, winnr, '&modifiable') ? '' : s:lightline_unmodifiable_char
 endfunction
 
@@ -356,7 +356,7 @@ function! LightlineReadonly()
   if &ft ==# "help" || &ft ==# "nerdtree" || &ft ==# "fern" || &ft ==# "taglist"
     return ''
   endif
-  if &readonly 
+  if &readonly
     return s:lightline_readonly_char
   endif
   return ''
@@ -366,7 +366,7 @@ function! LightlineModified()
   if &ft ==# "nerdtree" || &ft ==# "fern" || &ft ==# "taglist"
     return ''
   endif
-  if &modified 
+  if &modified
     return s:lightline_modified_char
   endif
   if !&modifiable
@@ -416,7 +416,7 @@ function! LightlineFileformat()
 endfunction
 
 function! LightlineFiletype()
-  if &ft ==# "help" || &ft ==# "nerdtree" || &ft ==# "fern" || &ft ==# "taglist" 
+  if &ft ==# "help" || &ft ==# "nerdtree" || &ft ==# "fern" || &ft ==# "taglist"
     return ''
   endif
   let icon = WebDevIconsGetFileTypeSymbol()
@@ -425,7 +425,7 @@ endfunction
 
 function! LightlineFilename()
   let fname = expand('%:t')
-  if &ft ==# "nerdtree" || &ft ==# "fern" || &ft ==# "taglist" 
+  if &ft ==# "nerdtree" || &ft ==# "fern" || &ft ==# "taglist"
     return ''
   endif
   return (fname !=# '' ? fname : '[No Name]')
@@ -433,7 +433,7 @@ endfunction
 
 function! LightlineDirname()
   let fname = expand('%:p:h')
-  if &ft ==# "nerdtree" || &ft ==# "fern" || &ft ==# "taglist" 
+  if &ft ==# "nerdtree" || &ft ==# "fern" || &ft ==# "taglist"
     return ''
   endif
   return (fname !=# '' ? fname : '[No Name]')
@@ -480,6 +480,14 @@ endfunction
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-better-whitespace
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufWritePre * :%s/\t/    /ge
+"let g:better_whitespace_ctermcolor='23'
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

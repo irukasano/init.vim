@@ -31,6 +31,10 @@ Plug 'ryanoasis/vim-devicons'
 " git
 Plug 'tpope/vim-fugitive'
 
+" white spaces
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'Yggdroot/indentLine'
+
 " colorscheme
 "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'w0ng/vim-hybrid'
