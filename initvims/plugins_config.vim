@@ -269,7 +269,7 @@ let s:lightline_unmodifiable_char = "\u26d4"
 let s:lightline_modified_char = "\u270f"
 let s:lightline_readonly_char = "\ue0a2"
 let g:lightline = {
-      \ 'colorscheme': 'selenized_white',
+      \ 'colorscheme': 'landscape',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['readonly', 'modified', 'fugitive', 'gitgutter', 'filename', 'dirname']],
