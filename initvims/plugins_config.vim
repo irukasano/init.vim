@@ -7,18 +7,12 @@ let g:coc_global_extensions = [
     \ 'coc-css',
     \ 'coc-json',
     \ 'coc-yaml',
-    \ 'coc-tsserver',
     \ 'coc-phpls',
+    \ 'coc-tsserver',
     \ 'coc-python',
     \]
 
 let g:coc_user_config = {}
-
-"highlight CocFloating ctermfg=0 ctermbg=13
-"highlight CocErrorFloat ctermfg=0 ctermbg=13
-"highlight CocErrorSign ctermfg=0 ctermbg=13
-"highlight CocWarningSign ctermfg=0 ctermbg=172
-"highlight CocMenuSel cterm=bold ctermfg=14 guifg=#40ffff
 
 inoremap <silent><expr> <TAB>
     \ pumvisible() ? "\<C-n>" :
@@ -265,9 +259,12 @@ augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let s:lightline_unmodifiable_char = "\u26d4"
-let s:lightline_modified_char = "\u270f"
-let s:lightline_readonly_char = "\ue0a2"
+"let s:lightline_unmodifiable_char = "\u26d4"
+let s:lightline_unmodifiable_char = "⛔"
+"let s:lightline_modified_char = "\u270f"
+let s:lightline_modified_char = "🖊️"
+"let s:lightline_readonly_char = "\ue0a2"
+let s:lightline_readonly_char = "🔒"
 let g:lightline = {
       \ 'colorscheme': 'landscape',
       \ 'active': {

@@ -130,8 +130,8 @@ if !has("gui_running")
 endif
 
 try
-    " colorscheme default
-    colorscheme koehler
+    colorscheme default
+    " colorscheme koehler
 catch
 endtry
 

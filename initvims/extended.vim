@@ -2,13 +2,14 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => init.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-noremap <leader>ss :source $MYVIMRC<CR> 
+noremap <leader>ss :source $MYVIMRC<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " depends on color plugin
-" colorscheme dracula
+"colorscheme delek
+"colorscheme zellner
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => change encoding to
