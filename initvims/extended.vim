@@ -9,7 +9,8 @@ noremap <leader>ss :source $MYVIMRC<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " depends on color plugin
 "colorscheme melange
-colorscheme dracula
+"colorscheme dracula
+colorscheme darkblue
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => change encoding to
