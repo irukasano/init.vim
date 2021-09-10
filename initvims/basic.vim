@@ -338,8 +338,8 @@ map <leader>ro :set readonly!<cr>
 set formatoptions+=mM
 
 "□や○の文字があってもカーソル位置がずれないようにする。
-set ambiwidth=double
-"set ambiwidth=single
+"set ambiwidth=double
+set ambiwidth=single
 
 "画面最後の行をできる限り表示する。
 "set display+=lastline
