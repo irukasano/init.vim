@@ -266,7 +266,7 @@ let s:lightline_modified_char = "🖊️"
 "let s:lightline_readonly_char = "\ue0a2"
 let s:lightline_readonly_char = "🔒"
 let g:lightline = {
-      \ 'colorscheme': 'landscape',
+      \ 'colorscheme': 'PaperColor',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['readonly', 'modified', 'fugitive', 'gitgutter', 'filename', 'dirname']],
