@@ -10,7 +10,10 @@ noremap <leader>ss :source $MYVIMRC<CR>
 " depends on color plugin
 "colorscheme melange
 "colorscheme dracula
-colorscheme hybrid
+try
+    colorscheme hybrid
+catch
+endtry
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => change encoding to
