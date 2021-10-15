@@ -252,8 +252,8 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 " tagjump
 "nnoremap <leader>j <C-]>
-nnoremap <leader>j :<C-u>tab stj <C-R>=expand('<cword>')<CR><CR>
-nnoremap <leader>jb <C-t>
+"nnoremap <leader>j :<C-u>tab stj <C-R>=expand('<cword>')<CR><CR>
+"nnoremap <leader>jb <C-t>
 
 
 """"""""""""""""""""""""""""""
