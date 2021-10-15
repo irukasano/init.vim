@@ -494,7 +494,7 @@ endfunction
 " fugitive
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <silent> <leader>gs :Git<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gb :Git blame<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
