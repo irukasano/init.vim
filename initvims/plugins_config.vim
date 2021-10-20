@@ -10,6 +10,7 @@ let g:coc_global_extensions = [
     \ 'coc-phpls',
     \ 'coc-tsserver',
     \ 'coc-python',
+    \ 'coc-eslint',
     \]
 
 let g:coc_user_config = {}
