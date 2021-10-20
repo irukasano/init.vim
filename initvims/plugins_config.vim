@@ -240,7 +240,7 @@ function! s:init_fern() abort
 endfunction
 
 let g:fern#renderer = 'nerdfont'
-map <leader>nn :Fern . -reveal=% -drawer -toggle -width=40<CR>
+map <leader>nn :Fern . -reveal=% -drawer -toggle -width=40 -keep<CR>
 map <leader>nb :Fern bookmark:///<CR>
 
 augroup my-glyph-palette
