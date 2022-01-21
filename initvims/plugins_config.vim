@@ -10,6 +10,7 @@ let g:coc_global_extensions = [
     \ 'coc-phpls',
     \ 'coc-tsserver',
     \ 'coc-python',
+    \ 'coc-eslint',
     \]
 
 let g:coc_user_config = {}
@@ -249,7 +250,7 @@ function! s:init_fern() abort
 endfunction
 
 let g:fern#renderer = 'nerdfont'
-map <leader>nn :Fern . -reveal=% -drawer -toggle -width=40<CR>
+map <leader>nn :Fern . -reveal=% -drawer -toggle -width=40 -keep<CR>
 map <leader>nb :Fern bookmark:///<CR>
 
 augroup my-glyph-palette
@@ -275,7 +276,7 @@ let s:lightline_modified_char = "🖊️"
 "let s:lightline_readonly_char = "\ue0a2"
 let s:lightline_readonly_char = "🔒"
 let g:lightline = {
-      \ 'colorscheme': 'landscape',
+      \ 'colorscheme': 'PaperColor',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['readonly', 'modified', 'fugitive', 'gitgutter', 'filename', 'dirname']],
@@ -502,7 +503,7 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fugitive
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gs :Git<CR>
 nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 

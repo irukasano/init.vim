@@ -57,13 +57,13 @@
 
 この環境では色つき絵文字フォントを使うことはできませんが、それ以外は満足しています。
 
-2. Windows Terminal + Cascadia Code (+NERD Font)
+2. Windows Terminal + PlemolJP Console(+NerdFont)
 
-こちらは試用している最中ですが、なにより絵文字フォントをカラーで使うことができるため、そういったファンシーさをターミナルに求める場合はよいと思います。
+Conemu は 256 色対応するのに少し手間がかかるため、もとも対応している Windows Terminal を使うことが増えました。絵文字フォントも一部使えます。
 日本語は正しく表示されているように思えますが、美しいわけではありません。
 
 * Windows Terminal (https://github.com/microsoft/terminal/releases)
-* Cascadia Code(+NERD Font) (https://github.com/ryanoasis/nerd-fonts/releases)
+* PlemolJP (https://github.com/yuru7/PlemolJP)
 
 
 ## キーマッピング
@@ -141,6 +141,8 @@
 |`<shift>p`         | ファイルをペースト                  |
 |`<shift>d`         | ファイルを削除                      |
 |`<shift>r`         | ファイルをリネーム                  |
+|`<shift>n`         | ファイルを新規作成                  |
+|`<shift>k`         | ディレクトリを新規作成              |
 |`!`                | 隠しファイルを表示/非表示           |
 |`?`                | ヘルプ                              |
 
