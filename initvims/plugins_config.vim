@@ -187,6 +187,15 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 "command! -bang -nargs=? -complete=dir Files
 "    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
+" ag コマンドは現在開いているファイルの拡張子と同じもののみ対象にする
+command! -bang -nargs=* Ag
+    \ call fzf#vim#ag(
+    \    <q-args>,
+    \    '-G ''.'.expand('%:e').'$''',
+    \    fzf#vim#with_preview(),
+    \    <bang>0
+    \ )
+
 " Terminal buffer options for fzf
 autocmd! FileType fzf
 autocmd  FileType fzf set noshowmode noruler nonu
