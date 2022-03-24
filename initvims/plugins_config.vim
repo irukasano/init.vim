@@ -66,7 +66,7 @@ nmap <silent> <leader><leader> :<C-u>CocList<cr>
 "Hover
 nmap <silent> <leader>hov :<C-u>call CocAction('doHover')<cr>
 "Definition
-nmap <silent> <leader>def :call CocAction('jumpDefinition', 'split')<cr>
+nmap <silent> <leader>def :call CocAction('jumpDefinition', 'tabe')<cr>
 "References
 nmap <silent> <leader>ref <Plug>(coc-references)
 "nmap <silent> <leader>ref :call CocAction('jumpReferences', 'split')<cr>
