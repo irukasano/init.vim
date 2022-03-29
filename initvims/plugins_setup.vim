@@ -16,6 +16,9 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim' " needed for previews
 Plug 'antoinemadec/coc-fzf'
 
+"php
+Plug 'stephpy/vim-php-cs-fixer'
+
 " file tree
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/fern-bookmark.vim'
