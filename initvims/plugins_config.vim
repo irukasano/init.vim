@@ -11,6 +11,7 @@ let g:coc_global_extensions = [
     \ 'coc-tsserver',
     \ 'coc-python',
     \ 'coc-eslint',
+    \ 'coc-diagnostic',
     \]
 
 let g:coc_user_config = {}
@@ -177,7 +178,7 @@ nnoremap <silent> <leader>fp :<C-u>ProjectFiles<CR>
 nnoremap <silent> <leader>fb :<C-u>Buffers<CR>
 nnoremap <silent> <leader>fh :<C-u>History<CR>
 nnoremap <silent> <leader>fc :<C-u>Commits<CR>
-nnoremap <silent> <leader>fs :<C-u>GFiles?<CR>
+nnoremap <silent> <leader>fg :<C-u>GFiles?<CR>
 
 function! s:find_git_root()
     " プロジェクトルートで開く
