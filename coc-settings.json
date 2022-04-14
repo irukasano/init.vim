@@ -1,5 +1,11 @@
 {
+    "diagnostic-languageserver.mergeConfig": true,
     "diagnostic-languageserver.filetypes": {
         "php": ["phpstan"]
+    },
+    "diagnostic-languageserver.linters": {
+        "phpstan": {
+            "command": "/home/user/.config/composer/vendor/bin/phpstan"
+        }
     }
 }

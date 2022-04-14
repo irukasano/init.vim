@@ -503,7 +503,7 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-php-cs-fixer
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:php_cs_fixer_path = "/var/www/html/vendor/bin/php-cs-fixer" " define the path to the php-cs-fixer.phar
+let g:php_cs_fixer_path = "~/.config/composer/vendor/bin/php-cs-fixer" " define the path to the php-cs-fixer.phar
 
 let g:php_cs_fixer_version = 2.19
 

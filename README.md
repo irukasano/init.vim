@@ -48,6 +48,10 @@
     $ nvim 
         nvim を起動するとすべてのプラグインがインストールされるので一旦終了し、再度 nvim 起動する
 
+### for vim(not nvim)
+
+    $ ln -s ~/.config/nvim/init.vim ~/.vimrc
+    $ ln -s ~/.config/nvim/coc-settings.json ~/.vim/coc-settings.json
 
 ## フォント
 
