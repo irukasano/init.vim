@@ -5,7 +5,8 @@
     },
     "diagnostic-languageserver.linters": {
         "phpstan": {
-            "command": "/home/user/.config/composer/vendor/bin/phpstan"
+            "command": "/home/user/.config/composer/vendor/bin/phpstan",
+            "//": "'"args": [ "analyze", "--level", "1", "--autoload-file", "./vendor/autoload.php", "--error-format", "raw", "--no-progress", "%file" ]'"
         }
     }
 }
