@@ -11,7 +11,8 @@ noremap <leader>ss :source $MYVIMRC<CR>
 "colorscheme melange
 "colorscheme dracula
 try
-    colorscheme hybrid
+    "colorscheme hybrid
+    colorscheme melange
 catch
 endtry
 

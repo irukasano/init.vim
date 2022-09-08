@@ -12,6 +12,7 @@ let g:coc_global_extensions = [
     \ 'coc-python',
     \ 'coc-eslint',
     \ 'coc-diagnostic',
+    \ 'coc-snippets',
     \]
 
 let g:coc_user_config = {}
@@ -36,8 +37,26 @@ endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+"                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
+    \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Map <tab> for trigger completion, completion confirm, snippet expand and jump
+" like VSCode: >
+inoremap <silent><expr> <TAB>
+    \ coc#pum#visible() ? coc#_select_confirm() :
+    \ coc#expandableOrJumpable() ?
+    \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -77,6 +96,8 @@ nmap <silent> <leader>ren <Plug>(coc-rename)
 nmap <silent> <leader>fmt <Plug>(coc-format)
 "Implementation
 nmap <silent> <leader>imp <Plug>(coc-implementation)
+" CocSnippets
+nmap <silent> <leader>snip :<C-u>CocCommand snippets.editSnippets<cr>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -245,6 +266,7 @@ let $FZF_DEFAULT_OPTS='--border=sharp --no-unicode'
 """"""""""""""""""""""""""""""
 " fern
 """"""""""""""""""""""""""""""
+let g:fern_disable_startup_warnings = 1
 function! s:init_fern() abort
   set foldcolumn=0
   set nonumber
@@ -406,10 +428,10 @@ function! LightlineFugitive()
   if &ft ==# "help" || &ft ==# "nerdtree" || &ft ==# "fern" || &ft ==# "taglist"
     return ''
   endif
-  if "" ==# fugitive#Head()
+  if "" ==# FugitiveHead()
     return ''
   endif
-  let _ = fugitive#head()
+  let _ = FugitiveHead()
   "return strlen(_) ? _ : ''
   return strlen(_) ? '' . _ : ''
 endfunction
