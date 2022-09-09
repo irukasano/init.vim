@@ -5,8 +5,8 @@
     },
     "diagnostic-languageserver.linters": {
         "phpstan": {
-            "command": "/home/user/.config/composer/vendor/bin/phpstan",
-            "//": "'"args": [ "analyze", "--level", "1", "--autoload-file", "./vendor/autoload.php", "--error-format", "raw", "--no-progress", "%file" ]'"
+            "command": "/home/user/.config/composer/vendor/bin/phpstan"
         }
-    }
+    },
+    "snippets.userSnippetsDirectory": "~/.config/nvim/data/snippets"
 }
