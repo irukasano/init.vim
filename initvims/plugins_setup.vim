@@ -16,6 +16,10 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim' " needed for previews
 Plug 'antoinemadec/coc-fzf'
 
+"php
+Plug 'stephpy/vim-php-cs-fixer'
+Plug 'irukasano/vim-composer'
+
 " file tree
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/fern-bookmark.vim'
@@ -45,4 +49,11 @@ Plug 'savq/melange'
 Plug 'dracula/vim', {'as': 'dracula'}
 
 call plug#end()
+
+" PHP tools
+call vim_composer#ComposerGlobalRequireFunc('FriendsOfPHP/PHP-CS-Fixer')
+call vim_composer#ComposerGlobalRequireFunc('phpstan/phpstan')
+
+
+
 

@@ -10,20 +10,27 @@ let g:coc_global_extensions = [
     \ 'coc-phpls',
     \ 'coc-tsserver',
     \ 'coc-python',
+    \ 'coc-eslint',
+    \ 'coc-diagnostic',
+    \ 'coc-snippets',
     \]
 
 let g:coc_user_config = {}
+
+"let g:coc_config_home = '~/.config/nvim/coc-settings.json'
+let g:coc_config_home = '~/.config/nvim/'
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+"let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+"let g:coc_snippet_prev = '<c-k>'
 
 inoremap <silent><expr> <TAB>
     \ pumvisible() ? "\<C-n>" :
     \ <SID>check_back_space() ? "\<TAB>" :
     \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
 " Use <c-space> to trigger completion.
 if has('nvim')
@@ -34,8 +41,28 @@ endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+"                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
+    \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Map <tab> for trigger completion, completion confirm, snippet expand and jump
+" like VSCode: >
+inoremap <silent><expr> <TAB>
+    \ coc#pum#visible() ? coc#_select_confirm() :
+    \ coc#expandableOrJumpable() ?
+    \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -67,7 +94,7 @@ nmap <silent> <leader><leader> :<C-u>CocList<cr>
 "Hover
 nmap <silent> <leader>hov :<C-u>call CocAction('doHover')<cr>
 "Definition
-nmap <silent> <leader>def :call CocAction('jumpDefinition', 'split')<cr>
+nmap <silent> <leader>def :call CocAction('jumpDefinition', 'tabe')<cr>
 "References
 nmap <silent> <leader>ref <Plug>(coc-references)
 "nmap <silent> <leader>ref :call CocAction('jumpReferences', 'split')<cr>
@@ -77,6 +104,8 @@ nmap <silent> <leader>ren <Plug>(coc-rename)
 nmap <silent> <leader>fmt <Plug>(coc-format)
 "Implementation
 nmap <silent> <leader>imp <Plug>(coc-implementation)
+" CocSnippets
+nmap <silent> <leader>snip :<C-u>CocCommand snippets.editSnippets<cr>
 
 "augroup mygroup
 "    autocmd!
@@ -134,7 +163,7 @@ endif
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 "" Mappings for CoCList
 "" Show all diagnostics.
@@ -165,7 +194,7 @@ nnoremap <silent> <leader>fp :<C-u>ProjectFiles<CR>
 nnoremap <silent> <leader>fb :<C-u>Buffers<CR>
 nnoremap <silent> <leader>fh :<C-u>History<CR>
 nnoremap <silent> <leader>fc :<C-u>Commits<CR>
-nnoremap <silent> <leader>fs :<C-u>GFiles?<CR>
+nnoremap <silent> <leader>fg :<C-u>GFiles?<CR>
 
 function! s:find_git_root()
     " プロジェクトルートで開く
@@ -175,6 +204,15 @@ endfunction
 command! ProjectFiles execute 'Files' s:find_git_root()
 "command! -bang -nargs=? -complete=dir Files
 "    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+" ag コマンドは現在開いているファイルの拡張子と同じもののみ対象にする
+command! -bang -nargs=* Ag
+    \ call fzf#vim#ag(
+    \    <q-args>,
+    \    '-G ''.'.expand('%:e').'$''',
+    \    fzf#vim#with_preview(),
+    \    <bang>0
+    \ )
 
 " Terminal buffer options for fzf
 autocmd! FileType fzf
@@ -223,13 +261,14 @@ let $FZF_DEFAULT_OPTS='--border=sharp --no-unicode'
 """"""""""""""""""""""""""""""
 " fern
 """"""""""""""""""""""""""""""
+let g:fern_disable_startup_warnings = 1
 function! s:init_fern() abort
   set foldcolumn=0
   set nonumber
 endfunction
 
 let g:fern#renderer = 'nerdfont'
-map <leader>nn :Fern . -reveal=% -drawer -toggle -width=40<CR>
+map <leader>nn :Fern . -reveal=% -drawer -toggle -width=40 -keep<CR>
 map <leader>nb :Fern bookmark:///<CR>
 
 augroup my-glyph-palette
@@ -258,7 +297,7 @@ let g:lightline = {
       \ 'colorscheme': 'PaperColor',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
-      \             ['readonly', 'modified', 'fugitive', 'gitgutter', 'filename', 'dirname']],
+      \             ['readonly', 'modified', 'fugitive', 'gitgutter', 'filename', 'dirname', 'cocstatus']],
       \   'right': [ ['lineinfo', 'percent'],
       \              ['fileformat','fileencoding', 'filetype'] ]
       \ },
@@ -384,10 +423,10 @@ function! LightlineFugitive()
   if &ft ==# "help" || &ft ==# "nerdtree" || &ft ==# "fern" || &ft ==# "taglist"
     return ''
   endif
-  if "" ==# fugitive#Head()
+  if "" ==# FugitiveHead()
     return ''
   endif
-  let _ = fugitive#head()
+  let _ = FugitiveHead()
   "return strlen(_) ? _ : ''
   return strlen(_) ? '' . _ : ''
 endfunction
@@ -478,6 +517,28 @@ function! LightlineMode()
           \ lightline#mode()
 endfunction
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-php-cs-fixer
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:php_cs_fixer_path = "~/.config/composer/vendor/bin/php-cs-fixer" " define the path to the php-cs-fixer.phar
+
+let g:php_cs_fixer_version = 2.19
+
+" If you use php-cs-fixer version 2.x
+"let g:php_cs_fixer_rules = "@PSR2"          " options: --rules (default:@PSR2)
+"let g:php_cs_fixer_cache = ".php_cs.cache" " options: --cache-file
+let g:php_cs_fixer_config_file = '.php_cs.dist' " options: --config
+" End of php-cs-fixer version 2 config params
+
+let g:php_cs_fixer_php_path = "/usr/bin/php"       " Path to PHP
+"let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
+let g:php_cs_fixer_dry_run = 0                     " Call command with dry-run option
+let g:php_cs_fixer_verbose = 0
+
+"nnoremap <silent><leader>pcd :call PhpCsFixerFixDirectory()<CR>
+"nnoremap <silent><leader>pcd :call PhpCsFixerFixDirectory()<CR>
+nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
+autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fugitive
