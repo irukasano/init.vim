@@ -43,7 +43,7 @@ ${1:public }function ${2:#:FunctionName}(${3})
 }
 endsnippet
 
-snippet function3 "function () use () {}" b
+snippet function3 "lambda function () use () {}" b
 function (${1}) use (${2}) {
     ${0:TARGET}
 }
@@ -147,6 +147,19 @@ class ${2:#:ClassName}${3:#:extends}
 }
 endsnippet
 
+snippet trait "trait" b
+/**
+ * ${1:undocumented class}
+ *
+ * @package ${3:default}
+ * @author ${4:`g:snips_author`}
+ */
+trait ${2:`vim_snippets#Filename()`}
+{
+    ${0:${VISUAL}}
+}
+endsnippet
+
 snippet doc "documentation" b
 /**
  * ${0}
@@ -183,4 +196,49 @@ snippet throw "throw exception" b
 throw new ${1}Exception(${2:"${3:#:Error Processing Request}"}${4:});
 ${0}
 endsnippet
+
+snippet assertNotEquals "$this->assertEquals($a, $b)" b
+$this->assertEquals(${1:$expected}, ${2:$actual});
+endsnippet
+
+snippet assertNotEquals "$this->assertNotEquals($a, $b)" b
+$this->assertNotEquals(${1:$expected}, ${2:$actual});
+endsnippet
+
+snippet assertFalse "$this->assertFalse($a)" b
+$this->assertFalse(${1});
+endsnippet
+
+snippet assertTrue "$this->assertTrue($a)" b
+$this->assertTrue(${1});
+endsnippet
+
+snippet assertContains "$this->assertContains($needle, $haystack)" b
+$this->assertContains(${1:$needle}, ${2:$haystack});
+endsnippet
+
+snippet assertNotContains "$this->assertNotContains($needle, $haystack)" b
+$this->assertNotContains(${1:$needle}, ${2:$haystack});
+endsnippet
+
+snippet assertCount "$this->assertCount($count, $haystack)" b
+$this->assertCount(${1:$expectedCount}, ${2:$haystack});
+endsnippet
+
+snippet assertNotCount "$this->assertNotCount($count, $haystack)" b
+$this->assertNotCount(${1:$count}, ${2:$haystack});
+endsnippet
+
+snippet assertNull "$this->assertNull($a)" b
+$this->assertNull(${1});
+endsnippet
+
+snippet assertNotNull "$this->assertNotNull($a)" b
+$this->assertNotNull(${1});
+endsnippet
+
+snippet markTestIncomplete "$this->markTestIncomplete()" b
+$this->markTestIncomplete(${1});
+endsnippet
+
 
