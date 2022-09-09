@@ -1,0 +1,322 @@
+# A valid snippet should starts with:
+#
+#        snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#        endsnippet
+#
+# Snippet options:
+#
+#        b - Beginning of line.
+#        i - In-word expansion.
+#        w - Word boundary.
+#        r - Regular expression
+#        e - Custom context snippet
+#        A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#        snippet emitter "emitter properties" b
+#        private readonly ${1} = new Emitter<$2>()
+#        public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#        endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+# Function
+snippet function "function definition" b
+function ${1:function_name}(${2}) {
+    ${0:${VISUAL}}
+}
+endsnippet
+
+# Anonymous Function
+snippet functiona "function Anonymous" b
+function(${1}) {
+    ${0:${VISUAL}}
+}
+endsnippet
+
+# Anonymous Function assigned to variable
+snippet functionv "function assigned to variable" b
+var ${1:function_name} = function(${2}) {
+    ${0:${VISUAL}}
+};
+endsnippet
+
+# Flow control
+# if
+snippet if "if (condition) { ... }" b
+if (${1:true}) {
+    ${0:${VISUAL}}
+}
+endsnippet
+
+# if ... else
+snippet ife "if (condition) { ... } else { ... }" b
+if (${1:true}) {
+    ${0:${VISUAL}}
+} else {
+    ${2}
+}
+endsnippet
+
+# tertiary conditional
+snippet if? "Ternary: `condition ? true : false`" b
+$1 ? $2: $0
+endsnippet
+
+# switch
+snippet switch "switch case" b
+switch (${1:expression}) {
+    case '${3:case}':
+        ${4}
+        break;
+    ${0}
+    default:
+        ${2}
+}
+endsnippet
+
+snippet case "case 'xyz': ... break" b
+case '${1:case}':
+    ${0:${VISUAL}}
+    break;
+endsnippet
+
+snippet try "try { ... } catch(e) { ... }" b
+try {
+    ${0:${VISUAL}}
+} catch (${1:e}) {
+    ${2:/* handle error */}
+}
+endsnippet
+
+snippet tryf "try { ... } catch(e) { ... } finally { ... }" b
+try {
+    ${0:${VISUAL}}
+} catch (${1:e}) {
+    ${2:/* handle error */}
+} finally {
+    ${3:/* be executed regardless of the try / catch result*/}
+}
+endsnippet
+
+snippet for "for (...) {...}" b
+for (let ${1:i} = 0, ${2:len} = ${3:Things.length}; $1 < $2; $1++) {
+    ${0:${VISUAL}}
+}
+endsnippet
+
+snippet forr "reversed for (...) {...}" b
+for (let ${2:i} = ${1:Things.length} - 1; $2 >= 0; $2--) {
+    ${0:${VISUAL}}
+}
+endsnippet
+
+# For in loop
+snippet forletin "for let in" b
+for (let ${1:prop} in ${2:object}) {
+    ${0:$2[$1]}
+}
+endsnippet
+
+snippet forof "for (const prop of object}) { ... }" b
+for (const ${1:prop} of ${2:object}) {
+    ${0:$1}
+}
+endsnippet
+
+snippet forletof "for (let prop of object}) { ... }" b
+for (let ${1:prop} of ${2:object}) {
+    ${0:$1}
+}
+endsnippet
+
+snippet while "(condition) { ... }" b
+while (${1:true}) {
+    ${0:${VISUAL}}
+}
+endsnippet
+
+snippet whilet "(true) { ... }" b
+while (true) {
+    ${0:${VISUAL}}
+}
+endsnippet
+
+# Documentation
+# docstring
+snippet /**
+    /**
+     * ${0:description}
+     *
+     */
+endsnippet
+
+# JSON.parse
+snippet jsonp "json parse" b
+JSON.parse(${0:jstr});
+endsnippet
+
+# JSON.stringify
+snippet jsons "json stringify" b
+JSON.stringify(${0:object});
+endsnippet
+
+# Debugging
+snippet debugger b
+debugger;
+endsnippet
+
+snippet consolel "console.log" b
+console.log(${0});
+endsnippet
+
+snippet consolels "console.log stringified" b
+console.log(JSON.stringify(${0}, null, 2));
+endsnippet
+
+snippet consoled "console.debug" b
+console.debug(${0});
+endsnippet
+
+snippet consolee "console.error" b
+console.error(${0});
+endsnippet
+
+snippet consolew "console.warn" b
+console.warn(${0});
+endsnippet
+
+snippet consolei "console.info" b
+console.info(${0});
+endsnippet
+
+snippet consolet "console.trace" b
+console.trace(${0:label});
+endsnippet
+
+snippet consoletime "console.time ... console.timeEnd" b
+console.time("${1:label}");
+${0:${VISUAL}}
+console.timeEnd("$1");
+endsnippet
+
+snippet consoletimestamp "console.timeStamp" b
+console.timeStamp("${1:label}");
+endsnippet
+
+snippet consolea "console.assert" b
+console.assert(${1:expression}, ${0:obj});
+endsnippet
+
+snippet consoleg "console.group" b
+console.group("${1:label}");
+${0:${VISUAL}}
+console.groupEnd();
+endsnippet
+
+snippet consoletable "console.table" b
+console.table(${1:"${2:value}"});
+endsnippet
+
+# setTimeout function
+snippet timeout "set timeout" b
+setTimeout(function () {${0}}${2}, ${1:10});
+endsnippet
+
+snippet const b
+const ${1} = ${0};
+endsnippet
+
+snippet let b
+let ${1} = ${0};
+endsnippet
+
+###
+# jQuery
+###
+
+snippet ajax "ajax then" b
+$.ajax({
+    url: '${1:mydomain.com/url}',
+    type: '${2:POST}',
+    cache: false,
+    dataType: '${3:xml/html/script/json}',
+    data: ${4:Element or Expression}
+}).then(
+    function(data, textStatus, jqXHR){
+    },
+    function(jqXHR, textStatus, errorThrown){
+    }
+);
+endsnippet
+
+snippet Deferred "Deferred" b
+$.Deferred()
+endsnippet
+
+snippet Deferredpromise "$.Deferred.promise()" b
+${1:deferred}.promise(${2:target})
+endsnippet
+
+snippet Deferredreject "$.Deferred.reject()" b
+${1:deferred}.reject(${2:args})
+endsnippet
+
+snippet Deferredresolve "$.Deferred.resolve()" b
+${1:deferred}.resolve(${2:args})
+endsnippet
+
+snippet when "$.when( Deferred )" b
+$.when(${1:deferreds})
+endsnippet
+
+snippet is_array "$.isArray" b
+$.isArray(${1:obj})
+endsnippet
+
+snippet is_empty "$.isEmptyObject" b
+$.isEmptyObject(${1:obj})
+endsnippet
+
+snippet is_function "$.isFunction" b
+$.isFunction(${1:obj})
+endsnippet
+
+snippet is_numeric "$.isNumeric" b
+$.isNumeric(${1:value})
+endsnippet
+
+snippet is_object "$.isPlainObject" b
+$.isPlainObject(${1:obj})
+endsnippet
+
+snippet is_xml "$.isXMLDoc" b
+$.isXMLDoc(${1:node})
+endsnippet
+
+snippet on "" b
+${1:obj}.on('${2:events}', function (${3:e}) {
+    ${0:// event handler}
+});
+endsnippet
+
+snippet parsejson "$.parseJSON" b
+$.parseJSON(${1:data})
+endsnippet
+
+snippet parsexml "$.parseXML" b
+$.parseXML(${1:data})
+endsnippet
+
+snippet $( "$(function(){" b
+$(function () {
+    ${0}
+});
+endsnippet
+
+
+
