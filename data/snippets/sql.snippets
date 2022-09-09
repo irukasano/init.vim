@@ -1,0 +1,68 @@
+# A valid snippet should starts with:
+#
+#        snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#        endsnippet
+#
+# Snippet options:
+#
+#        b - Beginning of line.
+#        i - In-word expansion.
+#        w - Word boundary.
+#        r - Regular expression
+#        e - Custom context snippet
+#        A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#        snippet emitter "emitter properties" b
+#        private readonly ${1} = new Emitter<$2>()
+#        public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#        endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+snippet select "select *" b
+select * from ${1:table}
+where ${2:condition}
+endsnippet
+
+snippet update "update" b
+update ${1:table}
+set ${2:column=value}
+where ${3:condition}
+endsnippet
+
+snippet delete "delete" b
+delete from ${1:table}
+where ${2:condition}
+endsnippet
+
+snippet createtable "create table" b
+create table ${1:table} (
+    ${0:columns}
+);
+endsnippet
+
+snippet createdatabase "create database" b
+DROP DATABASE IF EXISTS `${1:table}`;
+
+CREATE DATABASE IF NOT EXISTS `${1}` CHARACTER SET utf8;
+GRANT ALL PRIVILEGES ON `${1}`.* TO `user` IDENTIFIED BY 'userDBpass1%';
+endsnippet
+
+snippet createindex "create index" b
+create index ${0:$1_$2} on ${1:table}(${2:column});
+endsnippet
+
+snippet createuindex "create unique index" b
+create unique index ${1:name} on ${2:table}(${0:column});
+endsnippet
+
+snippet alteradd "alter table add column" b
+alter table ${1:table} add (${2:column} ${0:type});
+endsnippet
+
+
