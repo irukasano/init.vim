@@ -86,7 +86,8 @@ autocmd BufRead *.twig set syntax=html filetype=html
 """"""""""""""""""""""""""""""
 " => PHP section
 """"""""""""""""""""""""""""""
-au BufNewFile,BufRead *.ctp setfiletype php.html
+au BufNewFile,BufRead *.ctp set filetype=php.html
+au BufNewFile,BufRead */templates/*.php set filetype=php.html
 "autocmd FileType php :set dictionary=~/.vim_runtime/data/dict/php.dict
 "au BufNewFile,BufRead *.php set tags+=$HOME/.vim_runtime/data/tags/php.tags
 "au BufNewFile,BufRead *.ctp set tags+=$HOME/.vim_runtime/data/tags/php.tags

@@ -35,7 +35,7 @@ snippet function2 "public function with doc" b
  * ${4:#:undocumented function}
  *
  * @return ${5:void}
- * @author ${6}
+ * @author ${6:irukasano}
  **/
 ${1:public }function ${2:#:FunctionName}(${3})
 {
@@ -43,9 +43,19 @@ ${1:public }function ${2:#:FunctionName}(${3})
 }
 endsnippet
 
-snippet function3 "lambda function () use () {}" b
+snippet functionl "lambda function () use () {}" b
 function (${1}) use (${2}) {
     ${0:TARGET}
+}
+endsnippet
+
+snippet functiont "test function with doc" b
+/**
+ * @group ${2:void}
+ **/
+public function test${1:#:FunctionName}()
+{
+    \$this->markTestIncomplete();
 }
 endsnippet
 
@@ -152,7 +162,7 @@ snippet trait "trait" b
  * ${1:undocumented class}
  *
  * @package ${3:default}
- * @author ${4:`g:snips_author`}
+ * @author ${4:irukasano}
  */
 trait ${2:`vim_snippets#Filename()`}
 {
