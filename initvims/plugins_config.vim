@@ -276,6 +276,7 @@ let g:fern_disable_startup_warnings = 1
 function! s:init_fern() abort
   set foldcolumn=0
   set nonumber
+  nmap <buffer> D <Plug>(fern-action-remove)
 endfunction
 
 let g:fern#renderer = 'nerdfont'
