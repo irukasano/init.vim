@@ -56,7 +56,7 @@ inoremap <silent><expr> <TAB>
     \ coc#refresh()
 
 " Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
+imap <C-l> <Plug>(coc-snippets-expand-jump)
 
 
 function! s:check_back_space() abort
