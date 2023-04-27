@@ -53,6 +53,13 @@
     $ ln -s ~/.config/nvim/init.vim ~/.vimrc
     $ ln -s ~/.config/nvim/coc-settings.json ~/.vim/coc-settings.json
 
+## アップデート
+
+vim を起動して以下を行います
+
+    :PlugUpdate
+    :CocUpdate
+
 ## フォント
 
 コンソールアプリケーションとの関係もあり、以下の二通りで使っています。

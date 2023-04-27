@@ -20,6 +20,9 @@ Plug 'antoinemadec/coc-fzf'
 Plug 'stephpy/vim-php-cs-fixer'
 Plug 'irukasano/vim-composer'
 
+"svelte
+Plug 'evanleck/vim-svelte'
+
 " file tree
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/fern-bookmark.vim'

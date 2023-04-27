@@ -13,6 +13,7 @@ let g:coc_global_extensions = [
     \ 'coc-eslint',
     \ 'coc-diagnostic',
     \ 'coc-snippets',
+    \ '@yaegassy/coc-tailwindcss3',
     \]
 
 let g:coc_user_config = {}

@@ -8,11 +8,10 @@ noremap <leader>ss :source $MYVIMRC<CR>
 " => Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " depends on color plugin
-"colorscheme melange
-"colorscheme dracula
 try
-    "colorscheme hybrid
-    colorscheme melange
+    colorscheme hybrid
+    "colorscheme dracula
+    "colorscheme melange
 catch
 endtry
 
