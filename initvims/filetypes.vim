@@ -117,4 +117,10 @@ au BufNewFile,BufRead *.vue setfiletype vue.html
 au Filetype vue.html map <leader>bb :set makeprg=cordova\ build\ browser<cr>:make<cr>
 
 
+""""""""""""""""""""""""""""""
+" => Makefile section
+""""""""""""""""""""""""""""""
+au Filetype make set noexpandtab
+au FileType make autocmd! retabBeforeSave
+
 

@@ -1,3 +1,4 @@
+
 """"""""""""""""""""""""""""""
 " General
 """"""""""""""""""""""""""""""
@@ -102,6 +103,10 @@ else
   set signcolumn=yes
 endif
 
+set listchars=tab:>-,space:_,eol:$
+"set listchars=tab:￫,eol:↲
+"set listchars=tab:»,space:_
+set list
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -138,7 +143,7 @@ endtry
 set background=dark
 
 " Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
+"set encoding=utf8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac

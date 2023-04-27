@@ -553,7 +553,10 @@ nnoremap <silent> <leader>gd :Gdiff<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-better-whitespace
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd BufWritePre * :%s/\t/    /ge
+augroup retabBeforeSave
+    autocmd BufWritePre * :%s/\t/    /ge
+augroup END
+
 "let g:better_whitespace_ctermcolor='23'
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
