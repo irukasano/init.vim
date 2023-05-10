@@ -103,7 +103,8 @@ else
   set signcolumn=yes
 endif
 
-set listchars=tab:>-,space:_,eol:$
+set listchars=tab:>-,eol:$
+"set listchars=tab:>-,space:_,eol:$
 "set listchars=tab:￫,eol:↲
 "set listchars=tab:»,space:_
 set list
