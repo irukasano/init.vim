@@ -51,6 +51,9 @@ Plug 'elvessousa/sobrio'
 Plug 'savq/melange'
 Plug 'dracula/vim', {'as': 'dracula'}
 
+" markdown
+Plug 'dhruvasagar/vim-table-mode'
+
 call plug#end()
 
 " PHP tools
