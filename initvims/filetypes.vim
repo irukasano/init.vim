@@ -123,4 +123,26 @@ au Filetype vue.html map <leader>bb :set makeprg=cordova\ build\ browser<cr>:mak
 au Filetype make set noexpandtab
 au FileType make autocmd! retabBeforeSave
 
+""""""""""""""""""""""""""""""
+" => Markdown section
+""""""""""""""""""""""""""""""
+let s:md_preview_build = expand('~/dotfiles/bin/md-preview-build')
+let s:md_preview_serve = expand('~/dotfiles/bin/md-preview-serve')
+
+function! MdPreview() abort
+  write
+  if executable(s:md_preview_serve)
+    call job_start([s:md_preview_serve, '6444'])
+  endif
+  if executable(s:md_preview_build)
+    call job_start([s:md_preview_build, expand('%')])
+  else
+    echohl ErrorMsg | echom 'md-preview-build not found' | echohl None
+  endif
+endfunction
+
+augroup MdPreview
+  autocmd!
+  autocmd FileType markdown nnoremap <buffer> <silent> <Leader>mp :call MdPreview()<CR>
+augroup END
 
