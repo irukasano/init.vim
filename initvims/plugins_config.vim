@@ -199,7 +199,8 @@ nnoremap <silent> <leader>fg :<C-u>GFiles?<CR>
 
 function! s:find_git_root()
     " プロジェクトルートで開く
-    return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+    let root = system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+    return fnameescape(root)
 endfunction
 
 command! ProjectFiles execute 'Files' s:find_git_root()
