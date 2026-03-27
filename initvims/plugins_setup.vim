@@ -18,7 +18,7 @@ Plug 'antoinemadec/coc-fzf'
 
 "php
 Plug 'stephpy/vim-php-cs-fixer'
-Plug 'irukasano/vim-composer'
+"Plug 'irukasano/vim-composer'
 
 "svelte
 Plug 'evanleck/vim-svelte'
@@ -51,11 +51,14 @@ Plug 'elvessousa/sobrio'
 Plug 'savq/melange'
 Plug 'dracula/vim', {'as': 'dracula'}
 
+" markdown
+Plug 'dhruvasagar/vim-table-mode'
+
 call plug#end()
 
 " PHP tools
-call vim_composer#ComposerGlobalRequireFunc('FriendsOfPHP/PHP-CS-Fixer')
-call vim_composer#ComposerGlobalRequireFunc('phpstan/phpstan')
+"call vim_composer#ComposerGlobalRequireFunc('FriendsOfPHP/PHP-CS-Fixer')
+"call vim_composer#ComposerGlobalRequireFunc('phpstan/phpstan')
 
 
 

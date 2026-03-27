@@ -123,4 +123,50 @@ au Filetype vue.html map <leader>bb :set makeprg=cordova\ build\ browser<cr>:mak
 au Filetype make set noexpandtab
 au FileType make autocmd! retabBeforeSave
 
+""""""""""""""""""""""""""""""
+" => Markdown section
+""""""""""""""""""""""""""""""
+let s:md_preview_build = expand('~/dotfiles/bin/md-preview-build')
+let s:md_preview_serve = expand('~/dotfiles/bin/md-preview-serve')
+
+function! MdPreview() abort
+  write
+
+  let l:file = expand('%:p')
+  if empty(l:file) || !filereadable(l:file)
+    echohl ErrorMsg | echom 'MdPreview: current buffer is not a readable file' | echohl None
+    return
+  endif
+
+  " serve（存在する場合だけ）
+  if executable(s:md_preview_serve)
+    call system(shellescape(s:md_preview_serve) .. ' 6444')
+  endif
+
+  " build（同期）
+  if executable(s:md_preview_build)
+    let l:cmd = shellescape(s:md_preview_build) .. ' ' .. shellescape(l:file)
+    let l:out = system(l:cmd)
+
+    if v:shell_error != 0
+      echohl ErrorMsg | echom 'MdPreview: build failed' | echohl None
+      echom l:out
+      return
+    endif
+
+    " 成功時は必要ならログを messages に残す
+    " echom l:out
+    echom "build success"
+  else
+    echohl ErrorMsg | echom 'md-preview-build not found: ' .. s:md_preview_build | echohl None
+  endif
+endfunction
+
+augroup MdPreview
+  autocmd!
+  autocmd FileType markdown nnoremap <buffer> <silent> <Leader>mp :call MdPreview()<CR>
+augroup END
+
+autocmd FileType markdown nnoremap <silent> <Leader>mt :TableModeToggle<CR>
+autocmd FileType markdown nnoremap <silent> <Leader>mr :TableModeRealign<CR>
 
