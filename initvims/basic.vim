@@ -149,7 +149,11 @@ set background=dark
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-set termguicolors
+if exists('$TMUX') && !empty($TMUX)
+  set notermguicolors
+else
+  set termguicolors
+endif
 
 "set pumblend=10
 
