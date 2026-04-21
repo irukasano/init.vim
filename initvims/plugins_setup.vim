@@ -1,7 +1,11 @@
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+let plug_vim = data_dir . '/autoload/plug.vim'
+if empty(glob(plug_vim))
+  silent execute '!curl -fLo ' . shellescape(plug_vim) . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  if filereadable(plug_vim)
+    execute 'source ' . fnameescape(plug_vim)
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
 endif
 
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
@@ -59,7 +63,3 @@ call plug#end()
 " PHP tools
 "call vim_composer#ComposerGlobalRequireFunc('FriendsOfPHP/PHP-CS-Fixer')
 "call vim_composer#ComposerGlobalRequireFunc('phpstan/phpstan')
-
-
-
-
