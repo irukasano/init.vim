@@ -334,6 +334,9 @@ map <leader>q :e ~/buffer<cr>
 " Quickly open a markdown buffer for scribble
 map <leader>x :e ~/buffer.md<cr>
 
+" Start in paste mode so pasted text is not auto-indented.
+set paste
+
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
@@ -409,4 +412,3 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
-
