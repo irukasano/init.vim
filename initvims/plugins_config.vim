@@ -270,6 +270,68 @@ function! s:init_fern() abort
   nmap <buffer> D <Plug>(fern-action-remove)
 endfunction
 
+function! s:focus_fern_drawer_if_last_normal_window() abort
+  if !exists('s:focus_fern_after_quit_tab')
+    return
+  endif
+
+  let l:target_tabnr = s:focus_fern_after_quit_tab
+  unlet s:focus_fern_after_quit_tab
+
+  if l:target_tabnr != tabpagenr()
+    return
+  endif
+
+  let l:fern_winid = -1
+  let l:normal_win_count = 0
+
+  for l:wininfo in getwininfo()
+    if l:wininfo.tabnr != tabpagenr()
+      continue
+    endif
+
+    let l:filetype = getbufvar(l:wininfo.bufnr, '&filetype')
+    if l:filetype ==# 'fern'
+      let l:fern_winid = l:wininfo.winid
+    else
+      let l:normal_win_count += 1
+    endif
+  endfor
+
+  if l:fern_winid > 0 && l:normal_win_count <= 1 && &filetype !=# 'fern'
+    call win_gotoid(l:fern_winid)
+  endif
+endfunction
+
+function! s:schedule_focus_fern_drawer_on_quit() abort
+  if &filetype ==# 'fern'
+    return
+  endif
+
+  let l:fern_found = 0
+  let l:normal_win_count = 0
+
+  for l:wininfo in getwininfo()
+    if l:wininfo.tabnr != tabpagenr()
+      continue
+    endif
+
+    let l:filetype = getbufvar(l:wininfo.bufnr, '&filetype')
+    if l:filetype ==# 'fern'
+      let l:fern_found = 1
+    else
+      let l:normal_win_count += 1
+    endif
+  endfor
+
+  if l:fern_found && l:normal_win_count <= 1
+    let s:focus_fern_after_quit_tab = tabpagenr()
+    if exists('*timer_start')
+      call timer_start(1, {-> <SID>focus_fern_drawer_if_last_normal_window()})
+    endif
+  endif
+endfunction
+
 let g:fern#renderer = 'nerdfont'
 map <leader>nn :Fern . -reveal=% -drawer -toggle -width=40 -keep<CR>
 map <leader>nb :Fern bookmark:///<CR>
@@ -283,6 +345,7 @@ augroup END
 augroup fern-custom
   autocmd! *
   autocmd FileType fern call s:init_fern()
+  autocmd QuitPre * call s:schedule_focus_fern_drawer_on_quit()
 augroup END
 
 
@@ -576,4 +639,3 @@ let g:strip_whitespace_on_save=1
 "    },
 "}
 "EOF
-

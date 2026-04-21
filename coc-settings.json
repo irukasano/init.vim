@@ -9,5 +9,6 @@
             "args": [ "analyze", "--level", "1", "--autoload-file", "./vendor/autoload.php", "--error-format", "raw", "--no-progress", "%file" ]
         }
     },
-    "snippets.userSnippetsDirectory": "~/.config/nvim/data/snippets"
+    "snippets.userSnippetsDirectory": "~/.config/nvim/data/snippets",
+    "snippets.ultisnips.pythonPrompt": false
 }
