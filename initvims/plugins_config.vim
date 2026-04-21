@@ -611,9 +611,24 @@ autocmd BufWritePost * if &ft == "php" | silent! call PhpCsFixerFixFile()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fugitive
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! OpenTigStatusInTmuxPane() abort
+    if empty($TMUX)
+        echo 'tmux, tig が必要'
+        return
+    endif
+
+    if executable('tig') == 0
+        echo 'tig が必要'
+        return
+    endif
+
+    call system('tmux split-window -v -p 35 "exec tig status"')
+endfunction
+
 nnoremap <silent> <leader>gs :Git<CR>
 nnoremap <silent> <leader>gb :Git blame<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gt :call OpenTigStatusInTmuxPane()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-better-whitespace

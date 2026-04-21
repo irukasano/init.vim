@@ -115,6 +115,20 @@ set list
 " Enable syntax highlighting
 syntax enable
 
+function! HighlightZenkakuSpace() abort
+    highlight ZenkakuSpace cterm=underline gui=underline ctermfg=8 guifg=#666666
+    silent! syntax clear ZenkakuSpace
+    syntax match ZenkakuSpace /　/ display containedin=ALL
+endfunction
+
+augroup zenkaku_space
+    autocmd!
+    autocmd Syntax * call HighlightZenkakuSpace()
+    autocmd ColorScheme * call HighlightZenkakuSpace()
+augroup END
+
+call HighlightZenkakuSpace()
+
 " Enable 256 colors palette in Gnome Terminal
 if $COLORTERM == 'gnome-terminal'
     set t_Co=256
