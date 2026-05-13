@@ -4,6 +4,12 @@
 - [x] デフォルトで `paste` モードになるよう設定を追加する
 - [x] 設定ファイルを確認して変更内容を検証する
 
+### 2026-05-13: Vim で `~/.vim` が未展開になる問題を修正する
+
+- [x] `plugins_setup.vim` の `data_dir` 解決方法と影響範囲を確認する
+- [x] Vim 側の `data_dir` をホーム展開済みパスに修正する
+- [x] headless で `data_dir` 評価結果を検証する
+
 ### 2026-04-21: tmux 内で `tig status` を下ペインで開く
 
 - [x] 既存の Git キーマップ定義箇所を確認する
@@ -17,6 +23,17 @@
 - [x] headless で設定読み込みとハイライト定義を検証する
 
 # Review
+
+### 2026-05-13: Vim で `~/.vim` が未展開になる問題を修正する
+
+- 原因
+  - Vim 側の `data_dir` が文字列 `~/.vim` のままで、`curl --create-dirs` に渡る際に環境によってホーム展開されず `~` ディレクトリ作成につながり得た
+- 修正内容
+  - `initvims/plugins_setup.vim` の Vim 側 `data_dir` を `expand('~/.vim')` に変更し、常に展開済み絶対パスを使うようにした
+- 検証結果
+  - この環境の `/usr/bin/vim` も `NVIM v0.10.4` で、独立した legacy Vim は入っていないことを確認
+  - `nvim --headless -u NONE -i NONE` で `source initvims/plugins_setup.vim` 後の `data_dir` が `/home/sano/.local/share/nvim/site` のままであることを確認
+  - 修正内容は `expand('~/.vim')` の導入に限定されており、legacy Vim では `~/.vim` が展開済み絶対パスになる実装になっていることをコード上で確認
 
 - `initvims/basic.vim` に `set paste` を追加し、起動直後から貼り付け時の自動インデントを抑止するようにした
 - 既存の `<leader>pp` トグルはそのまま残し、必要時に手動で切り替え可能
