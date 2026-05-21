@@ -21,8 +21,17 @@ endtry
 if executable('osc52.sh')
 
   function! s:osc52_send(text) abort
-    " osc52.sh が出す OSC52 シーケンスを /dev/tty に書く
-    " （Vim の画面出力ではなく、端末へ直接）
+    " Neovim では system() で /dev/tty に流す経路が不安定なので、
+    " 生成した OSC52 シーケンスを stderr channel へ直接書く。
+    if has('nvim')
+      let l:osc52 = system('osc52.sh', a:text)
+      if v:shell_error == 0
+        call chansend(v:stderr, l:osc52)
+      endif
+      return
+    endif
+
+    " Vim は従来どおり /dev/tty へ直接書く。
     call system('osc52.sh | cat > /dev/tty', a:text)
   endfunction
 
@@ -57,5 +66,4 @@ noremap <leader>tw :OpenTestWindow<CR>
 ":wincmd l | i | <Up><CR> | <Esc> | wincmd h
 command! ExecutePrevCommand :wincmd l | call feedkeys("i\<Up>\<CR>\<Esc>\<C-h>")
 noremap <leader>tt :ExecutePrevCommand<CR>
-
 
