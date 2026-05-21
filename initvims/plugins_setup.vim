@@ -1,4 +1,4 @@
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+let data_dir = has('nvim') ? stdpath('data') . '/site' : expand('~/.vim')
 let plug_vim = data_dir . '/autoload/plug.vim'
 if empty(glob(plug_vim))
   silent execute '!curl -fLo ' . shellescape(plug_vim) . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
